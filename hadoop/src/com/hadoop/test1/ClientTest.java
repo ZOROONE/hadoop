@@ -25,62 +25,62 @@ public class ClientTest {
 
 	@Before
 	public void getConn() throws IOException {
-		// µÃµ½ÅäÖÃÎÄ¼ş
+		// å¾—åˆ°é…ç½®æ–‡ä»¶
 		conf = new Configuration(true);
-		// ¸ù¾İÅäÖÃÎÄ¼şµÃµ½ÎÄ¼şÏµÍ³
+		// æ ¹æ®é…ç½®æ–‡ä»¶å¾—åˆ°æ–‡ä»¶ç³»ç»Ÿ
 		fs = FileSystem.get(conf);
 	}
 
 	@After
 	public void after() throws IOException {
-		// ¹Ø±ÕÅäÖÃÎÄ¼ş
+		// å…³é—­é…ç½®æ–‡ä»¶
 		fs.close();
 	}
 
 	@Test
 	public void mkdir() throws IOException {
-		//µ±Ç°ÊÇrootÕË»§£¬ËùÓĞÄ¬ÈÏhdfs://node001:8020/user/root/tempµÄÒâË¼
+		// å½“å‰æ˜¯rootè´¦æˆ·ï¼Œæ‰€æœ‰é»˜è®¤hdfs:/mycluster/user/root/tempçš„æ„æ€
 		Path path = new Path("temp");
-		// ²é¿´ÊÇ·ñ´æÔÚÄ¿Â¼£¬Èç¹û´æÔÚ¾ÍÉ¾³ı
+		// æŸ¥çœ‹æ˜¯å¦å­˜åœ¨ç›®å½•ï¼Œå¦‚æœå­˜åœ¨å°±åˆ é™¤
 		if (fs.exists(path)) {
 			fs.delete(path, true);
 		}
 		fs.mkdirs(path);
 	}
-	
+
 	@Test
 	public void upload() throws IOException {
-		//ÎÄ¼şÉÏ´«
+		// æ–‡ä»¶ä¸Šä¼ 
 		Path path = new Path("hdfs://mycluster/user/root/temp/aa.txt");
 		FSDataOutputStream outputStream = fs.create(path);
-		
-		//ÊäÈëÁ÷
+
+		// è¾“å…¥æµ
 		InputStream inputStream = new BufferedInputStream(new FileInputStream(new File("e:/test1")));
-		
+
 		IOUtils.copyBytes(inputStream, outputStream, conf, true);
 	}
-	
+
 	@Test
-	public void readHDFSFileTest() throws IOException{
+	public void readHDFSFileTest() throws IOException {
 		Path path = new Path("/user/root/test");
-		
+
 		FileStatus file = fs.getFileStatus(path);
 		BlockLocation[] blockLocations = fs.getFileBlockLocations(file, 0, file.getLen());
 		for (BlockLocation blockLocation : blockLocations) {
 			System.err.println(blockLocation);
 		}
-		
+
 		FSDataInputStream inputStream = fs.open(path);
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
-		//Ìøµ½ÄÄ¸ö×Ö½Ú¶ÁÈ¡
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		// è·³åˆ°å“ªä¸ªå­—èŠ‚è¯»å–
 		inputStream.seek(0);
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
-		System.out.println((char)inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
+		System.out.println((char) inputStream.readByte());
 	}
-	
+
 }
