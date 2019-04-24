@@ -32,6 +32,7 @@ public class TianQiReducer extends Reducer<TianQi, IntWritable, Text, IntWritabl
 				rvalue.set(tq.getWd());
 				context.write(rkey, rvalue);
 				day = tq.getDay();
+				num++;
 			} else{
 				//如果和第一不是同一天，输出，否则继续执行
 				if(tq.getDay() != day){
