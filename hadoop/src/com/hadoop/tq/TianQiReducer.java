@@ -21,11 +21,9 @@ public class TianQiReducer extends Reducer<TianQi, IntWritable, Text, IntWritabl
 		 * 即上面传进来的tq是不断变化的，由于我们根据key排序决定相同年月，wd倒序排序，
 		 * 根据group分组比较器，决定这一组的宽度，即相同年月为一组，调用一次reduce
 		 */
-		
+		int num = 0;
+		int day = 0 ;
 		for (IntWritable intWritable : iter) {
-			int num = 0;
-			int day = 0 ;
-			
 			//如果是第一个数，直接输出，并赋值day
 			if(num == 0){
 				rkey.set(tq.getYear() + "-" + tq.getMonth() + "-" + tq.getDay());
