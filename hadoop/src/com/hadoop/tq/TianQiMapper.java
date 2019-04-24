@@ -21,7 +21,7 @@ public class TianQiMapper extends Mapper<Object, Text, TianQi, IntWritable> {
 	protected void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 		try {
 			// value 1949-10-01 14:21:02 34c, 首先按照制表符切割 得到日期和温度
-			String[] split = StringUtils.split(value.toString());
+			String[] split = StringUtils.split(value.toString(), '\t');
 			// 时间类
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = sdf.parse(split[0]);
