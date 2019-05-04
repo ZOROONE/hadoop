@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>mapreduce.framework.name</name> #平台的名字  
+        <value>yarn</value> #yarn , local（本机模拟跑） 
+    </property>
+</configuration>

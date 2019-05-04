@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<configuration>
+<property>
+   <name>yarn.nodemanager.aux-services</name>  #nodemanager集成服务，shuffle
+   <value>mapreduce_shuffle</value>            #reduce去map拉取数据，你不用自己去拉数据，告诉我我帮你去拉取
+</property>
+<property>
+   <name>yarn.resourcemanager.ha.enabled</name>
+   <value>true</value>
+ </property>
+ <property>
+   <name>yarn.resourcemanager.cluster-id</name>
+   <value>cluster1</value>
+ </property>
+ <property>
+   <name>yarn.resourcemanager.ha.rm-ids</name>
+   <value>rm1,rm2</value>
+ </property>
+ <property>
+   <name>yarn.resourcemanager.hostname.rm1</name>
+   <value>node003</value>
+ </property>
+ <property>
+   <name>yarn.resourcemanager.hostname.rm2</name>
+   <value>node004</value>
+ </property>
+ <property>
+   <name>yarn.resourcemanager.zk-address</name>
+   <value>node002:2181,node003:2181,node004:2181</value>
+ </property>
+</configuration>
